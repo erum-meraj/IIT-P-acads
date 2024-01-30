@@ -1,0 +1,32 @@
+    .data
+radius:     .float  5.0        # Change the value to your desired radius
+pi:         .float  3.14159    # Approximate value of pi
+
+    .text
+    .globl main
+
+main:
+    # Load radius into F0 register
+    lwc1    $f0, radius
+
+    # Square the radius
+    mul.s   $f1, $f0, $f0
+
+    # Load pi into F2 register
+    lwc1    $f2, pi
+
+    # Multiply pi by the squared radius
+    mul.s   $f3, $f1, $f2
+
+    # Display the result (area) in the console
+    # You may use syscall to print the result
+    # The actual syscall number may vary based on your environment
+    # For SPIM simulator, syscall number 2 is used for printing float
+    # For MARS simulator, syscall number 2 is also used for printing float
+    li      $v0, 2          # Load syscall number 2 (print float) into $v0
+    mov.s   $f12, $f3       # Move the result into $f12
+    syscall                 # Make the syscall
+
+    # Exit program
+    li      $v0, 10         # Load syscall number 10 (exit) into $v0
+    syscall

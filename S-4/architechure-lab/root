@@ -1,0 +1,28 @@
+    .data
+prompt:     .asciiz "Enter a number: "
+
+    .text
+    .globl main
+
+main:
+    # Display prompt to enter a number
+    li      $v0, 4              # Load syscall number 4 (print string) into $v0
+    la      $a0, prompt         # Load the address of the prompt into $a0
+    syscall
+
+    # Read a floating-point number as input
+    li      $v0, 6              # Load syscall number 6 (read float) into $v0
+    syscall
+    mov.s   $f12, $f0           # Move the input value from $f0 to $f12
+
+    # Calculate the square root
+    sqrt.s  $f0, $f12
+
+    # Display the result (square root) in the console
+    li      $v0, 2              # Load syscall number 2 (print float) into $v0
+    mov.s   $f12, $f0           # Move the result into $f12
+    syscall
+
+    # Exit program
+    li      $v0, 10             # Load syscall number 10 (exit) into $v0
+    syscall

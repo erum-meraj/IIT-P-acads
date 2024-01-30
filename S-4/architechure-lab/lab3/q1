@@ -1,0 +1,14 @@
+.data
+var1: .byte 'A', 'E', 127, -1, '\n'
+var2: .half -10, 0xffff
+var3: .word 0x12345678
+Var4: .word 0:10
+var5: .float 12.3, -0.1
+var6: .double 1.5e-10
+str1: .ascii "A String\n"
+str2: .asciiz "NULL Terminated String"
+array: .space 100
+name: .ascii "Your name"
+.text
+    li $v0, 10
+    syscall

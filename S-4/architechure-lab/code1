@@ -1,0 +1,70 @@
+.data
+    str:  .asciiz "input n1= "
+    str1: .asciiz "input n2= "
+    str2: .asciiz "\nAND of n1, n2: "
+    str3: .asciiz "\nOR of n1, n2: "
+    str4: .asciiz "\nmodulo n1%n2: "
+
+.text
+
+    # Prompt for input n1
+    la $a0, str
+    li $v0, 4
+    syscall
+
+    # Taking input n1
+    li $v0, 5
+    syscall
+    move $t0, $v0
+
+    # Prompt for input n2
+    la $a0, str1
+    li $v0, 4
+    syscall
+
+    # Taking input n2
+    li $v0, 5
+    syscall
+    move $t1, $v0
+
+    # Prep to print output
+    la $a0, str2
+    li $v0, 4
+    syscall
+
+    # Output the AND of n1 and n2
+    and $t2, $t0, $t1  # Perform AND operation: $t2 = $t0 AND $t1
+    move $a0, $t2
+    li $v0, 1
+    syscall
+    
+    # Prep to print output
+    la $a0, str3
+    li $v0, 4
+    syscall
+
+    # Output the AND of n1 and n2
+    or $t2, $t0, $t1  # Perform AND operation: $t2 = $t0 AND $t1
+    move $a0, $t2
+    li $v0, 1
+    syscall
+    
+    la $a0, str4
+    li $v0, 4
+    syscall
+
+    # Output the AND of n1 and n2
+    div $t2, $t0, $t1
+    mfhi $t2 
+    move $a0, $t2
+    li $v0, 1
+    syscall
+    
+     # Move the remainder to $t2
+
+    
+
+    
+    # Exit the program
+    li $v0, 10
+    syscall

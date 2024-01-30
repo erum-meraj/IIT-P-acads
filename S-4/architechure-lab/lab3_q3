@@ -1,0 +1,42 @@
+.data
+    str:  .asciiz "input n1= "
+    str1: .asciiz "input n2= "
+    result: .asciiz "\nmodulo n1%n2: "
+
+.text
+
+    # Prompt for input n1
+    la $a0, str
+    li $v0, 4
+    syscall
+
+    # Taking input n1
+    li $v0, 5
+    syscall
+    move $t0, $v0
+
+    # Prompt for input n2
+    la $a0, str1
+    li $v0, 4
+    syscall
+
+    # Taking input n2
+    li $v0, 5
+    syscall
+    move $t1, $v0
+    
+    la $a0, result
+    li $v0, 4
+    syscall
+
+    # Output the AND of n1 and n2
+    div $t2, $t0, $t1
+    mfhi $t2 
+    move $a0, $t2
+    li $v0, 1
+    syscall
+    
+    
+    # Exit the program
+    li $v0, 10
+    syscall
